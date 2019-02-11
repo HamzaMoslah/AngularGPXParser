@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
-import { HeroService } from '../hero.service';
 import GPX from 'gpx-for-runners';
 import { timer } from 'rxjs';
 import {} from 'googlemaps';
@@ -15,7 +13,6 @@ import { AgmCoreModule, MapsAPILoader } from "@agm/core";
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Hero[] = [];
   gpsContent: string;
   location = {};
   timer;
@@ -71,21 +68,11 @@ public destination: any;
 
 // distance = this.gpx.distance();
 
-  constructor(private heroService: HeroService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.getHeroes();
-    this.timer = timer(1000);
-    //this.onTimeOut();
-    // this.timer.subscribe((t) => this.onTimeOut());
-    // this.file.readText()
-    // .then(res => {
-    //     this.writtenContent = res;
-        this.gpxRead(``);
-        
-    // }).catch(err => {
-    //     console.log(err.stack);
-    // });
+    this.gpxRead(``);
+    
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(position => {
         this.location = position.coords;
@@ -121,29 +108,7 @@ public destination: any;
     this.origin = { lat: this.lat, lng: this.lng };
     this.destination = { lat: this.lat1, lng: this.lng1 };
     this.calculateDistance();
-    // this.origin = 'Taipei Main Station';
-    // this.destination = 'Taiwan Presidential Office';
   }
-
-  
-
-//   onTimeOut() {
-//     let startTime = (new Date()).getTime();
-//     let interval = 5000;
-
-//     (function p() {
-//         //this.fn();
-//         navigator.geolocation.getCurrentPosition(position => {
-//           this.location = position.coords;
-//           console.log(position.coords); 
-//         });
-//         if (((new Date).getTime() - startTime ) <= 25000)  {
-//             setTimeout(p, interval);
-//         }
-//     })();
-//       // do some stuff
-// }
-
 
   gpxRead(content: string): void {
     //const gpx1 = new gpx(content);
@@ -186,17 +151,5 @@ public destination: any;
     console.log('duration '+ gpx.duration().total);
     console.log('pace '+ gpx.pace().minutes+":"+gpx.pace().seconds);
     // this.getDistances();
-  }
-
-  // getDistances(): void {
-  //   this.heroService.getDistances()
-  //     .subscribe(heroes => {
-  //       console.log(heroes)
-  //     });
-  // }
-
-  getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes.slice(1, 5));
   }
 }
