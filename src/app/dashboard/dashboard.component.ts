@@ -22,8 +22,6 @@ export class DashboardComponent implements OnInit {
   lng1: number;
   public origin: any;
 public destination: any;
-
-  //file = fs.File.fromPath("C:\\Users\\hmoslah\\Desktop\\HamzaMoslah\\mapstogpx20190204_095926.gpx");
 //   gpxContent: string;
   
 
