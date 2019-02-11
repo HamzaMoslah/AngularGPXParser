@@ -7,6 +7,7 @@ import { AppComponent }         from './app.component';
 import { DashboardComponent }   from './dashboard/dashboard.component';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction';
+import {APP_BASE_HREF} from '@angular/common';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { AgmDirectionModule } from 'agm-direction';
     }),
     AgmDirectionModule
   ],
+  providers: [{provide: APP_BASE_HREF, useValue : '/' }],
   declarations: [
     AppComponent,
     DashboardComponent
